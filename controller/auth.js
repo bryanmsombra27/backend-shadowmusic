@@ -1,4 +1,4 @@
-const spotifyWebApi  = require('spotify-web-api-node');
+
 const fetch = require('node-fetch-commonjs');
 const client_id = '96dd4551a23a484e9879d0846b9e0e0b';
 const redirect_uri = 'http://localhost:3000/';
@@ -49,7 +49,7 @@ const encodedPayload = Buffer.from(payload).toString("base64");
 
       const data = await response.json();
 
-      console.log(data);
+ 
 
       return res.status(200).send({
         accessToken:data.access_token,
