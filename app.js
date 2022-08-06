@@ -2,6 +2,11 @@ const express = require('express');
 const {json,urlencoded} = require('express');
 const cors = require('cors');
 const app = express();
+const dotenv = require('dotenv');
+
+dotenv.config({
+    path:"./.env"
+})
 
 //middlewares
 app.use(cors());

@@ -1,16 +1,11 @@
 
 const fetch = require('node-fetch-commonjs');
-const client_id = '96dd4551a23a484e9879d0846b9e0e0b';
-const redirect_uri = 'http://localhost:3000/';
-const client_secret = "15bc25cc9fa740a2933c939d5b2015b9"
-
-
 
 const code = (req,res) => {
   
   const scope = "streaming user-read-email user-read-private user-library-read user-library-modify user-read-playback-state user-modify-playback-state"
   
-    res.redirect(`https://accounts.spotify.com/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}`);
+    res.redirect(`https://accounts.spotify.com/authorize?client_id=${process.env.SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.SPOTIFY_REDIRECT_URI}&response_type=code&scope=${scope}`);
 
 
 }
@@ -18,10 +13,10 @@ const login = async(req,res) => {
 
   const form = {
     grant_type: 'authorization_code',
-    client_id,
-    client_secret,
+    client_id: process.env.SPOTIFY_CLIENT_ID,
+    client_secret:process.env.SPOTIFY_CLIENT_SECRET,
     code: req.body.code,
-    redirect_uri,
+    redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
     }
 
   let formBody = [];
@@ -34,7 +29,7 @@ const login = async(req,res) => {
   formBody = formBody.join("&");
 
 
-const payload =`${client_id}:${client_secret}`;
+const payload =`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`;
 const encodedPayload = Buffer.from(payload).toString("base64");
 
   try {
